@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<defaultcontrol always="false">1000</defaultcontrol>
+	<menucontrol>0</menucontrol>
+	<backgroundcolor>0</backgroundcolor>
+	<animation effect="fade" time="200">WindowOpen</animation>
+	<animation effect="fade" time="200">WindowClose</animation>
+	<coordinates>
+		<left>0</left>
+		<top>0</top>
+	</coordinates>
+	<controls>
+		<control type="image">
+			<texture border="5">black_background.png</texture>
+			<height>100%</height>
+			<width>100%</width>
+		</control>
+		<control type="group">
+			<left>10</left>
+			<top>10</top>
+			<width>200</width>
+			<height>650</height>
+			<control type="image">
+				<visible>Control.HasFocus(1000)</visible>
+				<texture border="5" colordiffuse="black">button.png</texture>
+				<bordertexture border="5"  colordiffuse="grey">button.png</bordertexture>
+				<bordersize>2</bordersize>
+			</control>
+			<control type="list" id="1000">
+				<description>cat list</description>
+				<onright>2000</onright>
+				<itemlayout width="200" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>190</width>
+						<height>40</height>
+						<texture border="5">button.png</texture>
+					</control>
+					<control type="label">
+						<left>10</left>
+						<top>5</top>
+						<width>180</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+				</itemlayout>
+				<focusedlayout width="200" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>190</width>
+						<height>40</height>
+						<texture border="5" colordiffuse="orange">button.png</texture>
+					</control>
+					<control type="label">
+						<left>10</left>
+						<top>5</top>
+						<width>180</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+						<scroll>true</scroll>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+		<control type="group">
+			<left>210</left>
+			<top>10</top>
+			<width>300</width>
+			<height>650</height>
+			<control type="image">
+				<visible>Control.HasFocus(2000)</visible>
+				<texture border="5" colordiffuse="black">button.png</texture>
+				<bordertexture border="5"  colordiffuse="grey">button.png</bordertexture>
+				<bordersize>2</bordersize>
+			</control>
+			<control type="list" id="2000">
+				<description>group list</description>
+				<onleft>1000</onleft>
+				<onright>3000</onright>
+				<itemlayout width="300" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>290</width>
+						<height>40</height>
+						<texture border="5">button.png</texture>
+					</control>
+					<control type="label">
+						<left>10</left>
+						<top>5</top>
+						<width>280</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+				</itemlayout>
+				<focusedlayout width="300" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>290</width>
+						<height>40</height>
+						<texture border="5" colordiffuse="orange">button.png</texture>
+					</control>
+					<control type="label">
+						<left>10</left>
+						<top>5</top>
+						<width>280</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+						<scroll>true</scroll>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+		<control type="group">
+			<left>515</left>
+			<top>10</top>
+			<width>760</width>
+			<height>650</height>
+			<control type="image">
+				<visible>Control.HasFocus(3000)</visible>
+				<texture border="5" colordiffuse="black">button.png</texture>
+				<bordertexture border="5"  colordiffuse="grey">button.png</bordertexture>
+				<bordersize>2</bordersize>
+			</control>
+			<control type="image">
+				<height>45</height>
+				<texture border="5" colordiffuse="grey">button.png</texture>
+			</control>
+			<control type="label">
+				<left>410</left>
+				<top>5</top>
+				<width>175</width>
+				<height>40</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font13</font>
+				<textcolor>black</textcolor>
+				<label>Addon</label>
+			</control>
+			<control type="label">
+				<left>590</left>
+				<top>5</top>
+				<width>175</width>
+				<height>40</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font13</font>
+				<textcolor>black</textcolor>
+				<label>$ADDON[plugin.program.addonadministrator 30002]</label>
+			</control>
+			<control type="list" id="3000">
+				<top>45</top>
+				<onleft>2000</onleft>
+				<itemlayout width="760" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>750</width>
+						<height>40</height>
+						<texture border="5">button.png</texture>
+					</control>
+					<control type="image">
+						<!-- <visible>ListItem.IsSelected</visible> -->
+						<left>5</left>
+						<top>5</top>
+						<width>30</width>
+						<height>30</height>
+						<texture border="5">checkbox_tick.png</texture>
+					</control>
+					<control type="label">
+						<left>30</left>
+						<top>5</top>
+						<width>360</width>
+						<height>30</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+					<control type="label">
+						<left>400</left>
+						<top>5</top>
+						<width>175</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label2]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+					<control type="label">
+						<left>590</left>
+						<top>5</top>
+						<width>175</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.property(backuplabel)]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+				</itemlayout>
+				<focusedlayout width="760" height="50">
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>750</width>
+						<height>40</height>
+						<texture border="5" colordiffuse="orange">button.png</texture>
+					</control>
+					<control type="image">
+						<!-- <visible>ListItem.IsSelected</visible> -->
+						<left>5</left>
+						<top>5</top>
+						<width>30</width>
+						<height>30</height>
+						<texture border="5">checkbox_tick.png</texture>
+					</control>
+					<control type="label">
+						<left>30</left>
+						<top>5</top>
+						<width>360</width>
+						<height>30</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+					<control type="label">
+						<left>400</left>
+						<top>5</top>
+						<width>175</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label2]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+					<control type="label">
+						<left>590</left>
+						<top>5</top>
+						<width>175</width>
+						<height>30</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.property(backuplabel)]</label>
+						<font>font13</font>
+						<textcolor>black</textcolor>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+	</controls>
+</window>

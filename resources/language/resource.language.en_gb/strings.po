@@ -1,0 +1,259 @@
+# Kodi Media Center language file
+# Addon Name: Addon Administrator
+# Addon id: plugin.program.addonadministrator
+# Addon Provider: BYB
+msgid ""
+msgstr ""
+"Project-Id-Version: Kodi Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@kodi.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: English (http://www.transifex.com/projects/p/xbmc-addons/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgctxt "#30000"
+msgid "General"
+msgstr ""
+
+msgctxt "#30001"
+msgid "Debug"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Backup"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Restore"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Import"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Export"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Compare and set"
+msgstr ""
+
+msgctxt "#30007"
+msgid "Event logging"
+msgstr ""
+
+msgctxt "#30008"
+msgid "Select Addons to be backed up"
+msgstr ""
+
+msgctxt "#30009"
+msgid "Addons"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Ignore disabled"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Paths"
+msgstr ""
+
+msgctxt "#30012"
+msgid "Backup folder"
+msgstr ""
+
+msgctxt "#30013"
+msgid "Select Addons to be restored"
+msgstr ""
+
+
+msgctxt "#30014"
+msgid "Select restore point for"
+msgstr ""
+
+msgctxt "#30015"
+msgid "Set default path for import"
+msgstr ""
+
+msgctxt "#30016"
+msgid "Path"
+msgstr ""
+
+msgctxt "#30017"
+msgid "Path type"
+msgstr ""
+
+msgctxt "#30018"
+msgid "Drive"
+msgstr ""
+
+msgctxt "#30019"
+msgid "Kodi folder"
+msgstr ""
+
+msgctxt "#30020"
+msgid "Files"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Show hidden files and directories(Kodi setting)"
+msgstr ""
+
+msgctxt "#30022"
+msgid "Enabled"
+msgstr ""
+
+msgctxt "#30023"
+msgid "Disabled"
+msgstr ""
+
+msgctxt "#30024"
+msgid "Show hidden files and directories(Kodi setting) is currently set to"
+msgstr ""
+
+msgctxt "#30025"
+msgid "Would you like to set to"
+msgstr ""
+
+msgctxt "#30026"
+msgid "Select path for import"
+msgstr ""
+
+msgctxt "#30027"
+msgid "Select default path for import"
+msgstr ""
+
+msgctxt "#30028"
+msgid "Would you like to use the path set in settings or Browse?"
+msgstr ""
+
+msgctxt "#30029"
+msgid "Settings"
+msgdtr ""
+
+msgctxt "#30030"
+msgid "Browse"
+msgstr ""
+
+msgctxt "#30031"
+msgid "Select file to be imported"
+msgstr ""
+
+msgctxt "#30032"
+msgid "Addon Settings"
+msgstr ""
+
+msgctxt "#30033"
+msgid "Addon User Data"
+msgstr ""
+
+msgctxt "#30034"
+msgid "Continue"
+msgstr ""
+
+msgctxt "#30035"
+msgid "Cancel"
+msgstr ""
+
+msgctxt "#30036"
+msgid "More Info"
+msgstr ""
+
+msgctxt "#30037"
+msgid "Settings check all id's match"
+msgstr ""
+
+msgctxt "#30038"
+msgid "version check"
+msgstr ""
+
+msgctxt "#30039"
+msgid "Installed addon version {} Backup addon version {}"
+msgstr ""
+
+msgctxt "#30040"
+msgid "Missing settings from back up compared to installed addon"
+msgstr ""
+
+msgctxt "#30041"
+msgid "Settings restored"
+msgstr ""
+
+msgctxt "#30042"
+msgid "Settings Backed up"
+msgstr ""
+
+msgctxt "#30043"
+msgid "No default path set in settings, Do you wish to set one?"
+msgstr ""
+
+msgctxt "#30044"
+msgid "Export existing setting backup file or update and export?"
+msgstr ""
+
+msgctxt "#30045"
+msgid "Existing"
+msgstr ""
+
+msgctxt "#30046"
+msgid "Update"
+msgstr ""
+
+msgctxt "#30047"
+msgid "Select default path for export"
+msgstr ""
+
+msgctxt "#30048"
+msgid "File exported successful from"
+msgstr ""
+
+msgctxt "#30049"
+msgid "File export failed from"
+msgstr ""
+
+msgctxt "#30050"
+msgid "Select export path"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Export cancelled"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Backup cancelled"
+msgstr ""
+
+msgctxt "#30053"
+msgid "Restore cancelled"
+msgstr ""
+
+msgctxt "#30054"
+msgid "No addons in backup file currently installed"
+msgstr ""
+
+msgctxt "#30055"
+msgid "Import cancelled"
+msgstr ""
+
+msgctxt "#30056"
+msgid "Select Addon to be compared"
+msgstr ""
+
+msgctxt "#30057"
+msgid "Select date for compare for"
+msgstr ""
+
+msgctxt "#30058"
+msgid "Select path of backup file"
+msgstr ""
+
+msgctxt "#30059"
+msgid " Select backup file to be read"
+msgstr ""

@@ -1,2 +1,2 @@
-# plugin.program.addonsettingadministrator
+# plugin.program.addonadministrator
  
