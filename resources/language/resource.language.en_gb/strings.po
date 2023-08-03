@@ -257,3 +257,15 @@ msgstr ""
 msgctxt "#30059"
 msgid " Select backup file to be read"
 msgstr ""
+
+msgctxt "#30060"
+msgid "Reset selected"
+msgstr ""
+
+msgctxt "#30061"
+msgid "Apply selected"
+msgstr ""
+
+msgctxt "#30062"
+msgid "Close"
+msgstr ""

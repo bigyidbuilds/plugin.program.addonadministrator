@@ -8,6 +8,7 @@ import xbmcvfs
 
 from.utils import Log
 
+from .backupfile import ReadSavedSetting,ReadAddonInfo,ReadSavedSettings
 from .getsettings import GetSettingsCats,GetSettingLabel,GetSettingsInfo,GetSettingsGrp,GetSettings
 
 __addon__     = xbmcaddon.Addon('plugin.program.addonadministrator')
@@ -51,7 +52,7 @@ class SettingsCheck(xbmcgui.WindowXMLDialog):
 		# from.getsettings import GetSettingsInfo,GetSettingLabel
 		self.settinginfo  = GetSettingsInfo(addonid)
 		# Log(self.settinginfo)
-		from.backupfile  import ReadAddonInfo,ReadSavedSettings
+		# from.backupfile  import ReadAddonInfo,ReadSavedSettings
 		self.addoninfo_bk = ReadAddonInfo(backup_path,addonid,backup_dt)
 		self.settings_bk  = ReadSavedSettings(backup_path,addonid,backup_dt)
 		self.settings_bk_id = list(self.settings_bk.keys())
@@ -119,7 +120,8 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 		self.bckupdt = bckupdt
 		# from .getsettings import GetSettingsCats,GetSettingLabel
 		self.cat = GetSettingsCats(self.addonid)
-		self.selectedforchange = []
+		self.selectedforchange = {}
+		self.setlist = []
 
 	def onInit(self):
 		self.catlistcontr = self.getControl(self.CATLIST)
@@ -138,6 +140,7 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 			self.Close()
 		elif action.getId() in [ACTION_UP]:
 			if focusid == self.CATLIST:
+				self.setlistctr.reset()
 				pos = self.ContainerPostion(self.CATLIST)
 				self.LoadGroupCtrl(self.catlistcontr.getListItem(pos))
 			elif focusid == self.GROUPLIST:
@@ -145,6 +148,7 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 				self.LoadSetCtrl(self.grplistctr.getListItem(pos))
 		elif action.getId() in [ACTION_DOWN]:
 			if focusid == self.CATLIST:
+				self.setlistctr.reset()
 				pos = self.ContainerPostion(self.CATLIST)
 				self.LoadGroupCtrl(self.catlistcontr.getListItem(pos))
 			elif focusid == self.GROUPLIST:
@@ -152,10 +156,14 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 				self.LoadSetCtrl(self.grplistctr.getListItem(pos))
 		elif action.getId() in [ACTION_SELECT_ITEM]:
 			if focusid == self.SETTINGLIST:
-				pass
+				item = self.setlistctr.getSelectedItem()
+				pos = self.setlistctr.getSelectedPosition()
+				self.UpdateSelected(item)
+				self.ReLoadSetCtrl(item,pos)
 
 	def onFocus(self,controlId):
 		if controlId == self.CATLIST:
+			self.setlistctr.reset()
 			pos = self.ContainerPostion(self.CATLIST)
 			self.LoadGroupCtrl(self.catlistcontr.getListItem(pos))
 		elif controlId == self.GROUPLIST:
@@ -184,12 +192,36 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 		self.setlistctr = self.getControl(self.SETTINGLIST)
 		self.setlistctr.reset()
 		items = GetSettings(self.addonid,catId,groupId)
-		addsetting = xbmcaddon.Addon(self.addonid).getSettings()
 		Log(items)
 		for i in items:
 			li = xbmcgui.ListItem(GetSettingLabel(self.addonid,i.get('label')),xbmcaddon.Addon(self.addonid).getSetting(i.get('id')))
+			setvalue = ReadSavedSetting(self.backup_file,self.addonid,self.bckupdt,i.get('id'))
+			Log(setvalue)
+			li.setProperties({'backuplabel':setvalue, 'catid':catId, 'groupid':groupId})
+			for k,v in i.items():
+				li.setProperty(k,str(v))
+			if i.get('id') in self.selectedforchange:
+				li.setProperty('selected','true')
 			self.setlistctr.addItem(li)
 
 
 	def ContainerPostion(self,container):
 		return int(xbmc.getInfoLabel(f'Container({container}).Position'))
+
+	def UpdateSelected(self,item):
+		Log(self.selectedforchange)
+		key = item.getProperty('id')
+		value = item.getProperty('backuplabel')
+		if key in self.selectedforchange:
+			self.selectedforchange.pop(key)
+		else:
+			self.selectedforchange.update({key:value})
+		Log(self.selectedforchange)
+
+	def ReLoadSetCtrl(self,item,pos):
+		if item.getProperty('id') in self.selectedforchange:
+			item.setProperty('selected','true')
+		elif item.getProperty('id') not in self.selectedforchange:
+			item.setProperty('selected','false')
+
+

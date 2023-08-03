@@ -78,6 +78,7 @@ def ReadSavedSettings(path,addonid,backup_dt):
 
 def ReadSavedSetting(path,addonid,backup_dt,settingId):
 	#returns addon settings for a specified backup from datetime key
+	Log(settingId)
 	data = _GetData(path)
 	if data:
 		a = data.get(addonid)
@@ -86,7 +87,7 @@ def ReadSavedSetting(path,addonid,backup_dt,settingId):
 			if backup_data:
 				settings = backup_data.get('settings')
 				if settings:
-					return settings.get('settingId')
+					return settings.get(settingId)
 				else:
 					return None
 			else:

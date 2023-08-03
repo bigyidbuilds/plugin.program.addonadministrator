@@ -29,6 +29,7 @@
 			<control type="list" id="1000">
 				<description>cat list</description>
 				<onright>2000</onright>
+				<ondown>4000</ondown>
 				<itemlayout width="200" height="50">
 					<control type="image">
 						<left>5</left>
@@ -87,6 +88,7 @@
 				<description>group list</description>
 				<onleft>1000</onleft>
 				<onright>3000</onright>
+				<ondown>4000</ondown>
 				<itemlayout width="300" height="50">
 					<control type="image">
 						<left>5</left>
@@ -168,8 +170,10 @@
 				<label>$ADDON[plugin.program.addonadministrator 30002]</label>
 			</control>
 			<control type="list" id="3000">
+				<visible>Integer.IsGreaterOrEqual(Container(2000).NumItems,1)</visible>
 				<top>45</top>
 				<onleft>2000</onleft>
+				<ondown>4000</ondown>
 				<itemlayout width="760" height="50">
 					<control type="image">
 						<left>5</left>
@@ -179,7 +183,7 @@
 						<texture border="5">button.png</texture>
 					</control>
 					<control type="image">
-						<!-- <visible>ListItem.IsSelected</visible> -->
+						<visible>String.IsEqual(ListItem.property(selected),true)</visible>
 						<left>5</left>
 						<top>5</top>
 						<width>30</width>
@@ -229,7 +233,7 @@
 						<texture border="5" colordiffuse="orange">button.png</texture>
 					</control>
 					<control type="image">
-						<!-- <visible>ListItem.IsSelected</visible> -->
+						<visible>String.IsEqual(ListItem.property(selected),true)</visible>
 						<left>5</left>
 						<top>5</top>
 						<width>30</width>
@@ -246,6 +250,7 @@
 						<label>$INFO[ListItem.Label]</label>
 						<font>font13</font>
 						<textcolor>black</textcolor>
+						<scroll>true</scroll>
 					</control>
 					<control type="label">
 						<left>400</left>
@@ -257,6 +262,7 @@
 						<label>$INFO[ListItem.Label2]</label>
 						<font>font13</font>
 						<textcolor>black</textcolor>
+						<scroll>true</scroll>
 					</control>
 					<control type="label">
 						<left>590</left>
@@ -268,8 +274,64 @@
 						<label>$INFO[ListItem.property(backuplabel)]</label>
 						<font>font13</font>
 						<textcolor>black</textcolor>
+						<scroll>true</scroll>
 					</control>
 				</focusedlayout>
+			</control>
+		</control>
+		<control type="grouplist" id="4000">
+			<left>10</left>
+			<top>670</top>
+			<width>1270</width>
+			<height>40</height>
+			<itemgap>10</itemgap>
+			<orientation>horizontal</orientation>
+			<align>center</align>
+			<onup>1000</onup>
+			<control type="button" id="4001">
+				<description>reset Button</description>
+				<animation effect="zoom" center="auto" end="101">Focus</animation>
+				<width>200</width>
+				<height>40</height>
+				<texturefocus border="5" colordiffuse="orange">button.png</texturefocus>
+				<texturenofocus border="5">button.png</texturenofocus>
+				<visible>system.getbool(input.enablemouse)</visible>
+				<label>$ADDON[plugin.program.addonadministrator 30060]</label>
+				<font>font13</font>
+				<textcolor>black</textcolor>
+				<focusedcolor>black</focusedcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="button" id="4002">
+				<description>apply Button</description>
+				<animation effect="zoom" center="auto" end="101">Focus</animation>
+				<width>200</width>
+				<height>40</height>
+				<texturefocus border="5" colordiffuse="orange">button.png</texturefocus>
+				<texturenofocus border="5">button.png</texturenofocus>
+				<visible>system.getbool(input.enablemouse)</visible>
+				<label>$ADDON[plugin.program.addonadministrator 30061]</label>
+				<font>font13</font>
+				<textcolor>black</textcolor>
+				<focusedcolor>black</focusedcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="button" id="4003">
+				<description>Close Button</description>
+				<animation effect="zoom" center="auto" end="101">Focus</animation>
+				<width>200</width>
+				<height>40</height>
+				<texturefocus border="5" colordiffuse="orange">button.png</texturefocus>
+				<texturenofocus border="5">button.png</texturenofocus>
+				<visible>system.getbool(input.enablemouse)</visible>
+				<label>$ADDON[plugin.program.addonadministrator 30062]</label>
+				<font>font13</font>
+				<textcolor>black</textcolor>
+				<focusedcolor>black</focusedcolor>
+				<align>center</align>
+				<aligny>center</aligny>
 			</control>
 		</control>
 	</controls>
