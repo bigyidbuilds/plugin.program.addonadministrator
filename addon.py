@@ -74,10 +74,13 @@ def Compare():
 	selection = []
 	choice = []
 	sysaddons = getaddons.GetSysAddons()
-	if xbmcgui.Dialog().yesno(addon.getLocalizedString(30058), addon.getLocalizedString(30028), nolabel=addon.getLocalizedString(30030), yeslabel=addon.getLocalizedString(30029)):
+	pathselect = xbmcgui.Dialog().yesnocustom(addon.getLocalizedString(30058), addon.getLocalizedString(30028),customlabel=addon.getLocalizedString(30035), nolabel=addon.getLocalizedString(30030), yeslabel=addon.getLocalizedString(30029))
+	if pathselect == 1:
 		backuppath = os.path.join(addon.getSettingString('backup.store.path'),'addonsettings.buk')
-	else:
+	elif pathselect == 0:
 		backuppath = xbmcgui.Dialog().browse(1, addon.getLocalizedString(30059), 'local', mask='buk')
+	else:
+		return
 	if xbmcvfs.exists(backuppath):
 		backedup_addons = backupfile.ReadAddons(backuppath)
 		if backedup_addons != None:
@@ -91,14 +94,14 @@ def Compare():
 			choices = backupfile.ReadChoices(backuppath,selected)
 			# choices = choices.reverse()
 			for c in choices:
-				choice.append(BuildListItem(c))
+				choice.insert(0,BuildListItem(c))
 			ret2 = xbmcgui.Dialog().select(f"{addon.getLocalizedString(30057)} {xbmcaddon.Addon(selected).getAddonInfo('name')}",choice)
 			Log(ret2)
-	xbmc.executebuiltin('Dialog.Close(all,true)')
-	# Dialog.Close(dialog[,force])
-	d = SettingCompare(backuppath,selected,choice[ret2].getLabel())
-	d.doModal()
-	del d
+			xbmc.executebuiltin('Dialog.Close(all,true)')
+			# Dialog.Close(dialog[,force])
+			d = SettingCompare(backuppath,selected,choice[ret2].getLabel())
+			d.doModal()
+			del d
 
 def Export():
 	#Qa use existing backup or create new

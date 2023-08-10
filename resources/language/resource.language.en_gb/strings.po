@@ -269,3 +269,15 @@ msgstr ""
 msgctxt "#30062"
 msgid "Close"
 msgstr ""
+
+msgctxt "#30063"
+msgid "Setting"
+msgstr ""
+
+msgctxt "#30064"
+msgid "label"
+msgstr ""
+
+msgctxt "#30065"
+msgid " Value"
+msgstr ""

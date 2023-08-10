@@ -12,7 +12,6 @@ def _GetData(path):
 		f = open(path)
 		data = json.load(f)
 		f.close()
-		Log(data)
 		return data
 	else:
 		Log('No data to return')

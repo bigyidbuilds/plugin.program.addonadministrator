@@ -19,7 +19,7 @@ def Restore(addonid,backup_path):
 	if xbmcvfs.exists(backup_path):
 		choices = backupfile.ReadChoices(backup_path,addonid)
 		for date in choices:
-			choice.append(xbmcgui.ListItem(date))
+			choice.insert(0,xbmcgui.ListItem(date))
 		ret = xbmcgui.Dialog().select(f"{__addon__.getLocalizedString(30014)} {__retaddon__.getAddonInfo('name')}",choice)
 		if ret >= 0:
 			from .guicontrol import SettingsCheck

@@ -5,11 +5,13 @@ import xbmcaddon
 import xbmcgui
 import xbmcvfs
 
+import json
+
 
 from.utils import Log
 
 from .backupfile import ReadSavedSetting,ReadAddonInfo,ReadSavedSettings
-from .getsettings import GetSettingsCats,GetSettingLabel,GetSettingsInfo,GetSettingsGrp,GetSettings
+from .getsettings import GetSettingsCats,GetSettingLabel,GetSettingsInfo,GetSettingsGrp,GetSettings,GetSettingOptions
 
 __addon__     = xbmcaddon.Addon('plugin.program.addonadministrator')
 __addonpath__ = xbmcvfs.translatePath(__addon__.getAddonInfo('path'))
@@ -109,6 +111,9 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 	CATLIST     = 1000
 	GROUPLIST   = 2000
 	SETTINGLIST = 3000
+	RESETBUTTON = 4001
+	APPLYBUTTON = 4002
+	CLOSEBUTTON = 4003
 
 	def __new__(cls,backup_file,addonid,bckupdt):
 		return super(SettingCompare,cls).__new__(cls,'Setting_Compare.xml', __addonpath__,'Default', '720p')
@@ -122,6 +127,8 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 		self.cat = GetSettingsCats(self.addonid)
 		self.selectedforchange = {}
 		self.setlist = []
+		self.__addon__ = xbmcaddon.Addon('plugin.program.addonadministrator')
+		self.__ADDON__ = xbmcaddon.Addon(self.addonid)
 
 	def onInit(self):
 		self.catlistcontr = self.getControl(self.CATLIST)
@@ -161,7 +168,17 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 				self.UpdateSelected(item)
 				self.ReLoadSetCtrl(item,pos)
 
+	def onClick(self,controlId):
+		if controlId == self.CLOSEBUTTON:
+			self.Close()
+		elif controlId == self.APPLYBUTTON:
+			self.ApplySettings()
+		elif controlId == self.RESETBUTTON:
+			self.ResetList()
+
 	def onFocus(self,controlId):
+		if controlId in [self.CATLIST,self.GROUPLIST,self.SETTINGLIST]:
+			self.setProperty('lastfocus',str(controlId))
 		if controlId == self.CATLIST:
 			self.setlistctr.reset()
 			pos = self.ContainerPostion(self.CATLIST)
@@ -194,14 +211,38 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 		items = GetSettings(self.addonid,catId,groupId)
 		Log(items)
 		for i in items:
-			li = xbmcgui.ListItem(GetSettingLabel(self.addonid,i.get('label')),xbmcaddon.Addon(self.addonid).getSetting(i.get('id')))
-			setvalue = ReadSavedSetting(self.backup_file,self.addonid,self.bckupdt,i.get('id'))
-			Log(setvalue)
-			li.setProperties({'backuplabel':setvalue, 'catid':catId, 'groupid':groupId})
+			addoninfo = '[I][COLOR orange]Addon:[/I][/COLOR] '
+			backupinfo = f'[I][COLOR orange]{self.__addon__.getLocalizedString(30002)}:[/I][/COLOR] '
+			settinginfo = f'[I][COLOR orange]{self.__addon__.getLocalizedString(30063)}:[/I][/COLOR] '
+			backupvalue = ReadSavedSetting(self.backup_file,self.addonid,self.bckupdt,i.get('id'))
+			options = GetSettingOptions(self.addonid,catId,groupId,i.get('id'))
+			settingvalue = self.__ADDON__.getSetting(i.get('id'))
+			lilabel = GetSettingLabel(self.addonid,i.get('label'))
+			settinginfo += f'{lilabel} '
+			settinginfo += f'[I][COLOR grey]type:[/I][/COLOR] {i.get("type")}'
+			moreinfo = False
+			if options:
+				moreinfo = True
+				settinglabel = GetSettingLabel(self.addonid,options.get(settingvalue))
+				backuplabel = GetSettingLabel(self.addonid,options.get(backupvalue))
+				addoninfo += f'[I][COLOR grey]{self.__addon__.getLocalizedString(30064)}:[/I][/COLOR] {settinglabel}'
+				backupinfo += f'[I][COLOR grey]{self.__addon__.getLocalizedString(30064)}:[/I][/COLOR] {backuplabel}'
+			if settingvalue:
+				if not options:
+					settinglabel = settingvalue
+					backuplabel = backupvalue
+				moreinfo =True
+				addoninfo += f'[I][COLOR grey]{self.__addon__.getLocalizedString(30065)}:[/I][/COLOR] {settingvalue}'
+				backupinfo += f'[I][COLOR grey]{self.__addon__.getLocalizedString(30065)}:[/I][/COLOR] {backupvalue}'
+			li = xbmcgui.ListItem(lilabel)
+			li.setProperties({'backuplabel':backuplabel,'backupvalue':backupvalue,'settinglabel':settinglabel, 'settingvalue':settingvalue, 'catid':catId, 'groupid':groupId,'moreinfo':str(moreinfo).lower(),'settinginfo':settinginfo,'backupinfo':backupinfo,'addoninfo':addoninfo})
 			for k,v in i.items():
 				li.setProperty(k,str(v))
 			if i.get('id') in self.selectedforchange:
 				li.setProperty('selected','true')
+			Log(settinginfo)
+			Log(addoninfo)
+			Log(backupinfo)
 			self.setlistctr.addItem(li)
 
 
@@ -211,7 +252,7 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 	def UpdateSelected(self,item):
 		Log(self.selectedforchange)
 		key = item.getProperty('id')
-		value = item.getProperty('backuplabel')
+		value = item.getProperty('backupvalue')
 		if key in self.selectedforchange:
 			self.selectedforchange.pop(key)
 		else:
@@ -225,3 +266,22 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 			item.setProperty('selected','false')
 
 
+	def ApplySettings(self):
+		for k,v in self.selectedforchange.items():
+			if type(v) == str and not v in ['true','false']:
+				self.__ADDON__.setSettingString(k,v)
+			elif v in ['true','false'] :
+				v = json.loads(v)
+				self.__ADDON__.setSettingBool(k,v)
+			elif type(v) == int:
+				self.__ADDON__.setSettingInt(k,v)
+			elif type(v) == float:
+				self.__ADDON__.setSettingNumber(k,v)
+			else:
+				continue
+		self.selectedforchange.clear()
+
+	def ResetList(self):
+		Log(self.selectedforchange)
+		self.selectedforchange.clear()
+		Log(self.selectedforchange)

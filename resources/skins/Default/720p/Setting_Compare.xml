@@ -172,6 +172,7 @@
 			<control type="list" id="3000">
 				<visible>Integer.IsGreaterOrEqual(Container(2000).NumItems,1)</visible>
 				<top>45</top>
+				<height>485</height>
 				<onleft>2000</onleft>
 				<ondown>4000</ondown>
 				<itemlayout width="760" height="50">
@@ -208,7 +209,7 @@
 						<height>30</height>
 						<align>center</align>
 						<aligny>center</aligny>
-						<label>$INFO[ListItem.Label2]</label>
+						<label>$INFO[ListItem.property(settinglabel)]</label>
 						<font>font13</font>
 						<textcolor>black</textcolor>
 					</control>
@@ -259,7 +260,7 @@
 						<height>30</height>
 						<align>center</align>
 						<aligny>center</aligny>
-						<label>$INFO[ListItem.Label2]</label>
+						<label>$INFO[ListItem.property(settinglabel)]</label>
 						<font>font13</font>
 						<textcolor>black</textcolor>
 						<scroll>true</scroll>
@@ -278,6 +279,39 @@
 					</control>
 				</focusedlayout>
 			</control>
+			<control type="group">
+				<top>530</top>
+				<left>5</left>
+				<visible>Control.HasFocus(3000)</visible>
+				<control type="label">
+					<height>40</height>
+					<aligny>center</aligny>
+					<label>$INFO[Container(3000).ListItem(Container(3000).Position).property(settinginfo)]</label>
+					<font>font13</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+				</control>
+				<control type="label">
+					<top>40</top>
+					<height>40</height>
+					<aligny>center</aligny>
+					<visible>String.IsEqual(Container(3000).ListItem(Container(3000).Position).property(moreinfo),true)</visible>
+					<label>$INFO[Container(3000).ListItem(Container(3000).Position).property(addoninfo)]</label>
+					<font>font13</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+				</control>
+				<control type="label">
+					<top>80</top>
+					<height>40</height>
+					<aligny>center</aligny>
+					<visible>String.IsEqual(Container(3000).ListItem(Container(3000).Position).property(moreinfo),true)</visible>
+					<label>$INFO[Container(3000).ListItem(Container(3000).Position).property(backupinfo)]</label>
+					<font>font13</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+				</control>
+			</control>
 		</control>
 		<control type="grouplist" id="4000">
 			<left>10</left>
@@ -287,7 +321,9 @@
 			<itemgap>10</itemgap>
 			<orientation>horizontal</orientation>
 			<align>center</align>
-			<onup>1000</onup>
+			<onup condition="String.IsEqual(Window().Property(lastfocus),1000)">1000</onup>
+			<onup condition="String.IsEqual(Window().Property(lastfocus),2000)">2000</onup>
+			<onup condition="String.IsEqual(Window().Property(lastfocus),3000)">3000</onup>
 			<control type="button" id="4001">
 				<description>reset Button</description>
 				<animation effect="zoom" center="auto" end="101">Focus</animation>
