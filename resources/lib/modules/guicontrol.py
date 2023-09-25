@@ -51,10 +51,8 @@ class SettingsCheck(xbmcgui.WindowXMLDialog):
 
 	def __init__(self,addonid,backup_path,backup_dt):
 		super(SettingsCheck,self).__init__()
-		# from.getsettings import GetSettingsInfo,GetSettingLabel
 		self.settinginfo  = GetSettingsInfo(addonid)
-		# Log(self.settinginfo)
-		# from.backupfile  import ReadAddonInfo,ReadSavedSettings
+
 		self.addoninfo_bk = ReadAddonInfo(backup_path,addonid,backup_dt)
 		self.settings_bk  = ReadSavedSettings(backup_path,addonid,backup_dt)
 		self.settings_bk_id = list(self.settings_bk.keys())
@@ -123,7 +121,6 @@ class SettingCompare(xbmcgui.WindowXMLDialog):
 		self.backup_file = backup_file
 		self.addonid = addonid
 		self.bckupdt = bckupdt
-		# from .getsettings import GetSettingsCats,GetSettingLabel
 		self.cat = GetSettingsCats(self.addonid)
 		self.selectedforchange = {}
 		self.setlist = []
